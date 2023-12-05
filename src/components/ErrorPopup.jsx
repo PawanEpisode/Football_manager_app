@@ -1,5 +1,5 @@
 import React from "react";
-import triangle from "../../assets/triangle.png";
+import triangle from "../assets/triangle.png";
 
 const ErrorPopup = ({title, subtitle}) => {
   return (
