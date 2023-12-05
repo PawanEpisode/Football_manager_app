@@ -16,6 +16,14 @@
     font-weight: 500;
 }
 
+.text-gradient {
+    font-size: 30px;
+    background-clip: content-box;
+    background: -webkit-linear-gradient(#FEA013, #0acd0a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .importingContainer {
     display: flex;
     justify-content: center;

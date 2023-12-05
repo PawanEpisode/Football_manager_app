@@ -6,6 +6,7 @@ import DataTable from "./DataTable";
 import { useSelector } from "react-redux";
 import PlayerSearch from "./PlayerSearch";
 import EditableTeamName from "./EditableTeamName";
+import DownloadButton from "./DownloadButton";
 // import {selectPlayerData} from "../redux/playerSlice";
 
 const PlayerTable = () => {
@@ -59,11 +60,18 @@ const PlayerTable = () => {
               <span className="category-head">Weight</span>
               <span className="category-head">Nationality</span>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <span className="category-head">
-                You do not have any players on the roster
+            <div className="flex flex-col gap-10 justify-center items-center">
+              <div>
+                <span className="category-head">
+                  You do not have any players on the roster
+                </span>
+                <Button text={"Import Team"} type={"secondary"} />
+              </div>
+
+              <span className="text-gradient">
+                Try Downloading Sample CSV files to Test this Application
               </span>
-              <Button text={"Import Team"} type={"secondary"} />
+              <DownloadButton />
             </div>
           </>
         )}
