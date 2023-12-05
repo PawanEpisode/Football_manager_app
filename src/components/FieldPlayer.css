@@ -1,0 +1,11 @@
+.field-container {
+    padding: 40px;
+    background: linear-gradient(180deg, #222 0%, #131313 100%);
+}
+
+.roster {
+    color: var(--primary-orange, #FEA013);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px; /* 150% */
+}

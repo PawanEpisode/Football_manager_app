@@ -1,0 +1,24 @@
+.player-container {
+    padding: 40px;
+    background: linear-gradient(180deg, #222 0%, #131313 100%);
+}
+
+.roster {
+    color: var(--primary-orange, #FEA013);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px; /* 150% */
+}
+
+.category-head {
+    color: #CBCBCB;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.importingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(90%);
+}
