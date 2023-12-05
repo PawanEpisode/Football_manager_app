@@ -42,7 +42,7 @@ const PlayerSearch = ({ searchTerm, setSearchTerm,onSearch }) => {
       <input
         type="text"
         placeholder="Find Player"
-        className="ml-2.5 text-[14px] text-[#999]-400"
+        className="ml-2.5 text-[14px] bg-inherit text-[#999]-400"
         value={searchTerm}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}

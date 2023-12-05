@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import pen from "../assets/pen.png";
 
-const EditableTeamName = ({ defaultName }) => {
+const EditableTeamName = ({ title, defaultName }) => {
   const [teamName, setTeamName] = useState(defaultName);
   const nameRef = useRef(defaultName);
   const [iconVisible, setIconVisible] = useState(true);
@@ -19,13 +19,13 @@ const EditableTeamName = ({ defaultName }) => {
 
   return (
     <div className="flex flex-col items-start">
-      <span className="roster">Roster Details</span>
+      <span className="roster">{title}</span>
       <div className="flex gap-2 items-center py-3 rounded-md">
         <input
           value={teamName}
           onChange={handleNameChange}
           style={{ width: inputWidth() }}
-          className="text-[14px] text-[#999]-400"
+          className="text-[14px] bg-inherit text-[#999]-400"
           onBlur={handleBlur}
         />
         <img

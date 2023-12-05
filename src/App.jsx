@@ -7,6 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
+  // control team name state from here, Integrate the funcionality
+
   return (
     <div className='flex'>
       <Sidebar />

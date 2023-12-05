@@ -35,7 +35,7 @@ const PlayerTable = () => {
   return (
     <div className="player-container w-[1350px] text-white">
       <div className="flex h-12 justify-between items-center mb-10">
-        <EditableTeamName defaultName={"My Team"}/>
+        <EditableTeamName defaultName={"My Team"} title={"Roster Details"}/>
         <div className="flex gap-2 h-10 justify-center items-center">
           <PlayerSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handlePlayerSearch} />
           <Button

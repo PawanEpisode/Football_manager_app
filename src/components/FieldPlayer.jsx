@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./FieldPlayer.css";
 import pen from "../assets/pen.png";
 import field from "../assets/field.png";
-import Input from "./InputComp";
-import ErrorPopup from "./ErrorPopup/ErrorPopup";
+import ErrorPopup from "./ErrorPopup";
 import { useSelector } from "react-redux";
 import {
-  convertToCorrectLink,
   getErrorMessage,
   getPlayerDataCategoryPosition,
 } from "../constants/constants";
@@ -15,6 +13,7 @@ import PlayerCard from "./PlayerCard";
 import DataTableHeight from "./DataTableHeight";
 import DataTableWeight from "./DataTableWeight";
 import NameFlag from "./NameFlag";
+import EditableTeamName from "./EditableTeamName";
 
 const FieldPlayer = () => {
   const { playerData } = useSelector((state) => state.player);
@@ -53,13 +52,7 @@ const FieldPlayer = () => {
   return (
     <div className="field-container w-screen text-white">
       <div className="flex justify-between mb-6">
-        <div>
-          <span className="roster">Formation Overview</span>
-          <div className="flex gap-2 items-center">
-            <Input name={"My Team"} />
-            <img src={pen} className="w-4 h-4" alt="pen-icon" />
-          </div>
-        </div>
+        <EditableTeamName defaultName={"My Team"} title={"Formation Overview"}/>
       </div>
 
       <div className="bg-[#2D2D2D] flex gap-8 h-[620px] rounded-[8px] p-8">
