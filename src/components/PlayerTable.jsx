@@ -1,13 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./PlayerTable.css";
-import Input from "./InputComp";
-import Button from "./ButtonComp/button";
+import Button from "./Button";
 import DataTable from "./DataTable";
 import { useSelector } from "react-redux";
 import PlayerSearch from "./PlayerSearch";
 import EditableTeamName from "./EditableTeamName";
 import DownloadButton from "./DownloadButton";
-// import {selectPlayerData} from "../redux/playerSlice";
 
 const PlayerTable = () => {
   const { playerData } = useSelector((state) => state.player);

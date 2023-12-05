@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "./Modal";
 
 const Button = ({ text, type }) => {
   const [isOpen, setIsOpen] = useState(false);
