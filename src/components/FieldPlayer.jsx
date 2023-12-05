@@ -15,7 +15,7 @@ import DataTableWeight from "./DataTableWeight";
 import NameFlag from "./NameFlag";
 import EditableTeamName from "./EditableTeamName";
 
-const FieldPlayer = () => {
+const FieldPlayer = ({teamName, setTeamName}) => {
   const { playerData } = useSelector((state) => state.player);
 
   const starterData = playerData?.filter((item) => item["Starter"] === "Yes");
@@ -30,7 +30,7 @@ const FieldPlayer = () => {
     const currentPlayerClicked = starterData?.filter(
       (player) => player?._id === id
     );
-    console.log("id", id, currentPlayerClicked);
+
     setCurrentPlayer(currentPlayerClicked[0]);
   };
 
@@ -47,12 +47,10 @@ const FieldPlayer = () => {
         Object.values(position)[0]
     );
 
-  console.log("field",currentPlayer?.["Saves "])
-
   return (
     <div className="field-container w-screen text-white">
       <div className="flex justify-between mb-6">
-        <EditableTeamName defaultName={"My Team"} title={"Formation Overview"}/>
+        <EditableTeamName defaultName={"My Team"} teamName={teamName} setTeamName={setTeamName} title={"Formation Overview"}/>
       </div>
 
       <div className="bg-[#2D2D2D] flex gap-8 h-[620px] rounded-[8px] p-8">

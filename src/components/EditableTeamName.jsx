@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
 import pen from "../assets/pen.png";
 
-const EditableTeamName = ({ title, defaultName }) => {
-  const [teamName, setTeamName] = useState(defaultName);
-  const nameRef = useRef(defaultName);
+const EditableTeamName = ({ title,setTeamName, teamName }) => {
   const [iconVisible, setIconVisible] = useState(true);
+  const nameRef = useRef("My Team");
 
   const handleNameChange = (event) => {
     setTeamName(event.target.value);
@@ -14,7 +13,7 @@ const EditableTeamName = ({ title, defaultName }) => {
     setIconVisible(false);
   }
 
-  const inputWidth =() => `${teamName.length*10 + 10}px`;
+  const inputWidth =() => `${teamName?.length*10 + 10}px`;
 
 
   return (
@@ -30,7 +29,7 @@ const EditableTeamName = ({ title, defaultName }) => {
         />
         <img
             src={pen}
-            className={`w-4 h-4 cursor-pointer ${iconVisible ? "opacity-100": "opacity-0 hover:opacity-100"}`}
+            className={`w-4 h-4 cursor-pointer ${iconVisible || (teamName === nameRef.current) ? "opacity-100": "opacity-0 hover:opacity-100"}`}
             alt="pen-icon"
           />
       </div>

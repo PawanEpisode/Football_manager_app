@@ -125,7 +125,7 @@ const Modal = ({ open, onClose }) => {
 
         const array = csvRows?.filter((rowitem, i) => {
           const NewValues = getNewValues(rowitem.split(","));
-          // console.log("value",rowitem,NewValues,csvHeader,NewValues.length,csvHeader.length)
+
           if (NewValues.length !== csvHeader.length) {
             console.log(
               `Row ${i + 1} does not have the expected number of cells.`
@@ -171,7 +171,6 @@ const Modal = ({ open, onClose }) => {
       obj._id = JSON.stringify(NewValues);
       return obj;
     });
-    console.log(array);
     if(playerData) {
       dispatch(setPlayerData(null))
     }

@@ -1,5 +1,3 @@
-import { current } from "@reduxjs/toolkit";
-
 export const PlayerTableColumnName = [
   "Player Name",
   "Jersey Number",
@@ -87,7 +85,6 @@ export const convertToCorrectLink = (wrongLink) => {
 
   // Extract values from the wrong link using the pattern
   const match = wrongLink?.match(pattern);
-  console.log("match",wrongLink,match)
 
   if (match) {
     const [, id, date, name] = match;
@@ -147,31 +144,5 @@ export const getErrorMessage = (countStarters) => {
             "Your team has too many starters for one or more of the positions in the 4-3-3 formation.",
     }
 }
-
-// async function findValidImageLink(link1, link2) {
-//   const isValid = async (url) => {
-//     try {
-//       const response = await fetch(url);
-//       console.log("isValid",response)
-//       return response.ok;
-//     } catch (error) {
-//       return false;
-//     }
-//   };
-
-//   const isLink1Valid = await isValid(link1);
-//   const isLink2Valid = await isValid(link2);
-
-//   console.log("valid image link", isLink1Valid, isLink2Valid);
-
-//   if (isLink1Valid) {
-//     return link1;
-//   } else if (isLink2Valid) {
-//     return link2;
-//   } else {
-//     // Neither link is valid
-//     return null;
-//   }
-// }
 
 

@@ -46,8 +46,6 @@ const EditModal = ({ playerInfo, open, onClose }) => {
         _id: playerInfo._id,
     };
 
-    console.log("edit", playerData, NationalityOptions, InitialPlayerInfo)
-
     const [editPlayerInfo, setEditPlayerInfo] = useState({...InitialPlayerInfo});
 
     const handlePlayerName =(event) => {
@@ -73,7 +71,6 @@ const EditModal = ({ playerInfo, open, onClose }) => {
                 }
                 delete tempPlayerInfo._id;
                 tempPlayerInfo._id = JSON.stringify(Object.values(tempPlayerInfo));
-                console.log("tempPlayerInfo",tempPlayerInfo)
                 return tempPlayerInfo;
             }
             return item;
@@ -154,7 +151,6 @@ const EditModal = ({ playerInfo, open, onClose }) => {
         setIsEdited(!isTwoObjectDiffer(InitialPlayerInfo, editPlayerInfo));
     },[editPlayerInfo]);
 
-    console.log("edit",editPlayerInfo)
     return ReactDOM.createPortal(
     <>
       <div style={OVERLAY_STYLES} onClick={onClose} />

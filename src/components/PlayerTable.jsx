@@ -7,7 +7,7 @@ import PlayerSearch from "./PlayerSearch";
 import EditableTeamName from "./EditableTeamName";
 import DownloadButton from "./DownloadButton";
 
-const PlayerTable = () => {
+const PlayerTable = ({teamName, setTeamName}) => {
   const { playerData } = useSelector((state) => state.player);
   const [filteredPlayer,setFilteredPlayer] = useState(playerData ? [...playerData]: null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,7 +35,7 @@ const PlayerTable = () => {
   return (
     <div className="player-container w-[1350px] text-white">
       <div className="flex h-12 justify-between items-center mb-10">
-        <EditableTeamName defaultName={"My Team"} title={"Roster Details"}/>
+        <EditableTeamName defaultName={"My Team"} teamName={teamName} setTeamName={setTeamName} title={"Roster Details"}/>
         <div className="flex gap-2 h-10 justify-center items-center">
           <PlayerSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handlePlayerSearch} />
           <Button
@@ -47,7 +47,7 @@ const PlayerTable = () => {
 
       <div className="w-[1270px] relative bg-[#2D2D2D] h-[620px] overflow-scroll no-scrollbar rounded-[8px] gap-5">
         {playerData ? (
-          <DataTable data={filteredPlayer} />
+          <DataTable data={filteredPlayer} onSearch={handlePlayerSearch} setSearchTerm={setSearchTerm}/>
         ) : (
           <>
             <div className="category-table mb-[212px] mt-[13px] justify-between flex px-[20px] py-2">
