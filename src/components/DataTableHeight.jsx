@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const DataTableHeight = ({height}) => {
+const DataTableHeight = ({ value }) => {
   return (
-    <span>{height !== 'Unknown' ? `${(height/100).toFixed(2)} m`: height}</span>
-  )
-}
+    <span>
+      {value !== "Unknown" ? `${(value / 100).toFixed(2)} m` : value}
+    </span>
+  );
+};
 
 export default DataTableHeight;

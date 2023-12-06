@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import pen from "../assets/pen.png";
 
-const EditableTeamName = ({ title,setTeamName, teamName }) => {
+const EditableTeamName = ({ title, setTeamName, teamName }) => {
   const [iconVisible, setIconVisible] = useState(true);
   const nameRef = useRef("My Team");
 
@@ -9,12 +9,11 @@ const EditableTeamName = ({ title,setTeamName, teamName }) => {
     setTeamName(event.target.value);
   };
 
-  const handleBlur =() => {
+  const handleBlur = () => {
     setIconVisible(false);
-  }
+  };
 
-  const inputWidth =() => `${teamName?.length*10 + 10}px`;
-
+  const inputWidth = () => `${teamName?.length * 10 + 10}px`;
 
   return (
     <div className="flex flex-col items-start">
@@ -28,13 +27,17 @@ const EditableTeamName = ({ title,setTeamName, teamName }) => {
           onBlur={handleBlur}
         />
         <img
-            src={pen}
-            className={`w-4 h-4 cursor-pointer ${iconVisible || (teamName === nameRef.current) ? "opacity-100": "opacity-0 hover:opacity-100"}`}
-            alt="pen-icon"
-          />
+          src={pen}
+          className={`w-4 h-4 cursor-pointer ${
+            iconVisible || teamName === nameRef.current
+              ? "opacity-100"
+              : "opacity-0 hover:opacity-100"
+          }`}
+          alt="pen-icon"
+        />
       </div>
     </div>
   );
 };
 
-export default EditableTeamName
+export default EditableTeamName;

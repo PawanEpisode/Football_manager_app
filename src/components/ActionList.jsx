@@ -1,16 +1,17 @@
 import React, { useImperativeHandle, useState } from "react";
 import pengray from "../assets/pengray.png";
 import trash from "../assets/trash.png";
-import close from "../assets/close.png";
 import { forwardRef } from "react";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
+import CommonButtonWithImage from "./CommonButtonWithImage";
 
 const ActionList = forwardRef((playerData, ref) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [activeAction, setActiveAction] = useState(false);
 
+  // USE useImperativeHandle
   useImperativeHandle(ref, () => ({
     closeActive() {
       setActiveAction(false);
@@ -40,6 +41,34 @@ const ActionList = forwardRef((playerData, ref) => {
   const handleEditDialogClose = () => {
     setIsEditDialogOpen(false);
   };
+
+  const ActionMenuOptions = [
+    {
+      label: "Edit Player",
+      icon: pengray,
+      onClick: handleEditDialogOpen, // Assuming handleEditDialogOpen is a function
+    },
+    {
+      label: "Delete Player",
+      icon: trash,
+      onClick: handleDeleteDialogOpen, // Assuming handleDeleteDialogOpen is a function
+    },
+  ];
+
+  const ActionMenu = ({ options }) => {
+    return (
+      <ul className="flex flex-col gap-2">
+        {options.map((option, index) => (
+          <li key={index} className="cursor-pointer rounded-lg active:bg-red-800">
+            <div onClick={option.onClick} className="flex justify-start items-center gap-2 p-2">
+              <img src={option.icon} alt={`${option.label}-button`} />
+              <p className="text-[#cbcbcb] text-sm font-medium">{option.label}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    );
+  };
   return (
     <>
       {activeAction && (
@@ -51,35 +80,10 @@ const ActionList = forwardRef((playerData, ref) => {
         >
           <div className="flex justify-between">
             <p className="text-[#f8f8f8] text-lg font-semibold">Actions</p>
-            <button onClick={() => setActiveAction(false)}>
-              <img src={close} alt="close-button" />
-            </button>
+            <CommonButtonWithImage onClick={() => setActiveAction(false)} />
           </div>
 
-          <ul className="flex flex-col gap-2">
-            <li className="cursor-pointer rounded-lg active:bg-red-800">
-              <div
-                onClick={handleEditDialogOpen}
-                className="flex justify-start items-center gap-2 p-2"
-              >
-                <img src={pengray} alt="edit-button" />
-                <p className="text-[#cbcbcb] text-sm font-medium">
-                  Edit Player
-                </p>
-              </div>
-            </li>
-            <li className="cursor-pointer rounded-lg active:bg-red-800">
-              <div
-                onClick={handleDeleteDialogOpen}
-                className="flex justify-start items-center gap-2 p-2"
-              >
-                <img src={trash} alt="delete-button" />
-                <p className="text-[#cbcbcb] text-sm font-medium">
-                  Delete Player
-                </p>
-              </div>
-            </li>
-          </ul>
+          {<ActionMenu options={ActionMenuOptions}/>}
         </div>
       )}
       <EditModal

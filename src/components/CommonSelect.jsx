@@ -1,6 +1,6 @@
 import React from "react";
 
-const CommonSelect = ({ label, width,value, options, onChange }) => {
+const CommonSelect = ({ label, width, value, options, onChange }) => {
   return (
     <div className={`flex flex-col gap-2`} style={{ width: `${width}px` }}>
       <label className="text-[#fff] text-sm font-medium" htmlFor={label}>
@@ -20,12 +20,9 @@ const CommonSelect = ({ label, width,value, options, onChange }) => {
           value={value}
         >
           {options.map((item, index) => (
-            <option
-                key={index}
-                value={item}
-              >
-                {item}
-              </option>
+            <option key={index} value={item}>
+              {item}
+            </option>
           ))}
         </select>
       </div>

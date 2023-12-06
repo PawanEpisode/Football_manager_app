@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import search from "../assets/search.png";
 import close from "../assets/close.png";
+import CommonButtonWithImage from "./CommonButtonWithImage";
 
-const PlayerSearch = ({ searchTerm, setSearchTerm,onSearch }) => {
-  
+const PlayerSearch = ({ searchTerm, setSearchTerm, onSearch }) => {
   const [searchOrEnterClicked, setSearchOrEnterClicked] = useState(false);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
     setSearchOrEnterClicked(false);
-    if(event.target.value === "") {
-      onSearch('');
+    if (event.target.value === "") {
+      onSearch("");
     }
   };
 
@@ -30,7 +30,6 @@ const PlayerSearch = ({ searchTerm, setSearchTerm,onSearch }) => {
   };
 
   const clearSearch = () => {
-
     setSearchOrEnterClicked(false);
     setSearchTerm("");
     onSearch("");
@@ -47,15 +46,20 @@ const PlayerSearch = ({ searchTerm, setSearchTerm,onSearch }) => {
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
       />
-      {searchTerm && !searchOrEnterClicked && <button type="button" className="text-[#FEA013] text-sm font-medium" onClick={handleSearch}>Search</button>}
-      {searchOrEnterClicked && searchTerm
-       && (
-        <button onClick={clearSearch}>
-          <img src={close} width={10} alt="clear-icon" />
+      {searchTerm && !searchOrEnterClicked && (
+        <button
+          type="button"
+          className="text-[#FEA013] text-sm font-medium"
+          onClick={handleSearch}
+        >
+          Search
         </button>
+      )}
+      {searchOrEnterClicked && searchTerm && (
+        <CommonButtonWithImage onClick={clearSearch} />
       )}
     </div>
   );
 };
 
-export default PlayerSearch
+export default PlayerSearch;

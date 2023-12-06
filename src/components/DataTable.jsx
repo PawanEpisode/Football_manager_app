@@ -4,15 +4,16 @@ import NameFlag from "./NameFlag";
 import DataTableHeight from "./DataTableHeight";
 import DataTableWeight from "./DataTableWeight";
 import ActionButton from "./ActionButton";
+import CommonButtonWithText from "./CommonButtonWithText";
 
 const DataTable = ({ data, onSearch, setSearchTerm }) => {
   const applyWidth = (key) =>
     key === "Player Name" ? "w-[200px]" : "w-[100px]";
 
-    const handleClearCriteria =() => {
-      onSearch("");
-      setSearchTerm("")
-    }
+  const handleClearCriteria = () => {
+    onSearch("");
+    setSearchTerm("");
+  };
   return (
     <div className="w-full">
       <table className="w-full relative">
@@ -28,9 +29,9 @@ const DataTable = ({ data, onSearch, setSearchTerm }) => {
                     <th
                       key={key}
                       className={`text-[#CBCBCB] 
-                text-xs font-medium text-left ${
-                  key !== "Action Button" && applyWidth(key)
-                }`}
+                      text-xs font-medium text-left ${
+                        key !== "Action Button" && applyWidth(key)
+                      }`}
                     >
                       {key === "Action Button" ? "" : key}
                     </th>
@@ -51,16 +52,18 @@ const DataTable = ({ data, onSearch, setSearchTerm }) => {
                       case "Player Name":
                         content = (
                           <NameFlag
-                            name={item[val]}
-                            imgUrl={item["Flag Image"]}
+                            value={{
+                              name: item[val],
+                              imgUrl: item["Flag Image"],
+                            }}
                           />
                         );
                         break;
                       case "Height":
-                        content = <DataTableHeight height={item[val]} />;
+                        content = <DataTableHeight value={item[val]} />;
                         break;
                       case "Weight":
-                        content = <DataTableWeight weight={item[val]} />;
+                        content = <DataTableWeight value={item[val]} />;
                         break;
                       case "Action Button":
                         content = <ActionButton data={item} />;
@@ -75,7 +78,7 @@ const DataTable = ({ data, onSearch, setSearchTerm }) => {
                         className={`text-[#cbcbcb] ${
                           val !== "Action Button" && applyWidth(val)
                         }
-                text-sm font-medium text-left`}
+                        text-sm font-medium text-left`}
                       >
                         {content}
                       </td>
@@ -86,15 +89,15 @@ const DataTable = ({ data, onSearch, setSearchTerm }) => {
             </tbody>
           </>
         ) : (
-          <div className="w-full flex flex-col px-60 py-40 gap-4 justify-center items-center text-white">
+          <div
+            className="w-full flex flex-col px-60 py-40 
+          gap-4 justify-center items-center text-white"
+          >
             <p>No Player matching your Search criteria</p>
-            <button 
-            onClick={handleClearCriteria}
-            type="button" 
-            className="bg-[#FEA013] px-4 py-2 
-            rounded-lg text-sm font-normal cursor-pointer">
-              Clear Criteria
-            </button>
+            <CommonButtonWithText
+              onClick={handleClearCriteria}
+              title={"Clear Criteria"}
+            />
           </div>
         )}
       </table>

@@ -1,45 +1,24 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import close from "../assets/close.png";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { setPlayerData } from "../redux/playerSlice";
+import CommonButtonWithImage from "./CommonButtonWithImage";
+import {
+  INITIAL_FILE_DATA,
+  MODAL_STYLES,
+  OVERLAY_STYLES,
+} from "../constants/constants";
 
-const MODAL_STYLES = {
-  position: "fixed",
-  top: "46%",
-  left: "52%",
-  transform: "translate(-50%, -50%)",
-  backgroundColor: "#2D2D2D",
+const NEW_MODAL_STYLES = {
+  ...MODAL_STYLES,
   padding: "24px",
-  zIndex: 1000,
   width: "800px",
   height: "600px",
-  borderRadius: "8px",
-  boxShadow: "0px 2px 12px 0px rgba(22, 22, 22, 0.50)",
 };
-
-const OVERLAY_STYLES = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, 0.1)",
-  zIndex: 1000,
-};
-
-const fileData = {
-  "Total Players": 0,
-  "Goalkeepers": 0,
-  "Defenders": 0,
-  "Midfielders": 0,
-  "Forwards": 0
-}
 
 const Modal = ({ open, onClose }) => {
-
   const dispatch = useDispatch();
-  const { playerData } = useSelector(state => state.player);
+  const { playerData } = useSelector((state) => state.player);
 
   const [file, setFile] = useState();
   const [error, setError] = useState(false);
@@ -69,46 +48,44 @@ const Modal = ({ open, onClose }) => {
     const csvRows = text.slice(text.indexOf("\n") + 1).split("\n");
     return {
       csvHeader,
-      csvRows
-    }
-  }
+      csvRows,
+    };
+  };
 
-  const getFileSummary =(csvRows) => {
-    
-    const fileDataSummary = csvRows.reduce((acc,current) => {
-      const NewValues = getNewValues(current.split(','));
-      switch(NewValues[3]) {
+  const getFileSummary = (csvRows) => {
+    const fileDataSummary = csvRows.reduce((acc, current) => {
+      const NewValues = getNewValues(current.split(","));
+      switch (NewValues[3]) {
         case "Goalkeeper":
-            return {
-              ...acc,
-              ["Goalkeepers"]: acc["Goalkeepers"] +1
-            }
+          return {
+            ...acc,
+            ["Goalkeepers"]: acc["Goalkeepers"] + 1,
+          };
         case "Midfielder":
           return {
             ...acc,
-            ["Midfielders"]: acc["Midfielders"] +1
-          }
+            ["Midfielders"]: acc["Midfielders"] + 1,
+          };
         case "Forward":
           return {
             ...acc,
-            ["Forwards"]: acc["Forwards"] +1
-          }
+            ["Forwards"]: acc["Forwards"] + 1,
+          };
         case "Defender":
           return {
             ...acc,
-            ["Defenders"]: acc["Defenders"] +1
-          }
+            ["Defenders"]: acc["Defenders"] + 1,
+          };
         default:
           return acc;
       }
-    },fileData);
+    }, INITIAL_FILE_DATA);
 
     return {
       ...fileDataSummary,
-      ["Total Players"]: csvRows.length
-    }
-  
-  }
+      ["Total Players"]: csvRows.length,
+    };
+  };
 
   const handleOnChange = (e) => {
     const fileInput = e.target;
@@ -131,7 +108,7 @@ const Modal = ({ open, onClose }) => {
               `Row ${i + 1} does not have the expected number of cells.`
             );
             // if rowitem is string having no length, so returning 'rowitem' instead
-            return !rowitem.length ? "rowitem": rowitem;
+            return !rowitem.length ? "rowitem" : rowitem;
           }
 
           for (let j = 0; j < NewValues.length; j++) {
@@ -144,7 +121,7 @@ const Modal = ({ open, onClose }) => {
           }
         });
 
-        const fileSummaryData = getFileSummary(csvRows); 
+        const fileSummaryData = getFileSummary(csvRows);
         if (array.length) {
           setFileSummary(null);
           setError(true);
@@ -162,7 +139,7 @@ const Modal = ({ open, onClose }) => {
     const { csvHeader, csvRows } = getHeaderAndRows(string);
 
     const array = csvRows.map((i) => {
-      const NewValues = getNewValues(i.split(","))
+      const NewValues = getNewValues(i.split(","));
 
       const obj = csvHeader.reduce((object, header, index) => {
         object[header] = NewValues[index];
@@ -171,8 +148,8 @@ const Modal = ({ open, onClose }) => {
       obj._id = JSON.stringify(NewValues);
       return obj;
     });
-    if(playerData) {
-      dispatch(setPlayerData(null))
+    if (playerData) {
+      dispatch(setPlayerData(null));
     }
     dispatch(setPlayerData(array));
   };
@@ -194,12 +171,10 @@ const Modal = ({ open, onClose }) => {
   return ReactDOM.createPortal(
     <>
       <div style={OVERLAY_STYLES} onClick={onClose} />
-      <div style={MODAL_STYLES}>
+      <div style={NEW_MODAL_STYLES}>
         <div className="flex justify-between items-center border-[#494949] border-b-2 py-4 mb-6">
           <p className="text-[#f8f8f8] font-semibold text-lg">Importer</p>
-          <button onClick={onClose}>
-            <img src={close} />
-          </button>
+          <CommonButtonWithImage onClick={onClose} />
         </div>
 
         <div className="flex flex-col justify-center items-start">
@@ -248,22 +223,34 @@ const Modal = ({ open, onClose }) => {
                     </p>
 
                     {file && fileSummary && (
-                        <>
-                          <p className="text-[#f8f8f8] text-sm font-medium mb-6">File Summary</p>
-                          <div className="flex flex-col gap-2">
-                            <div className="flex justify-between gap-20">
-                              {Object.keys(fileSummary).map((item,index) => (
-                                <p key={index} className="text-left w-25 text-[#cbcbcb] text-sm font-normal">{item}</p>
-                              ))}
-                            </div>
-                            <div className="flex justify-between gap-20">
-                              {Object.values(fileSummary).map((item,index) => (
-                                <p key={index} className="text-left w-25 text-[#cbcbcb] text-base font-semibold">{item}</p>
-                              ))}
-                            </div>
+                      <>
+                        <p className="text-[#f8f8f8] text-sm font-medium mb-6">
+                          File Summary
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          <div className="flex justify-between gap-20">
+                            {Object.keys(fileSummary).map((item, index) => (
+                              <p
+                                key={index}
+                                className="text-left w-25 text-[#cbcbcb] text-sm font-normal"
+                              >
+                                {item}
+                              </p>
+                            ))}
                           </div>
-                        </>
-                      )}
+                          <div className="flex justify-between gap-20">
+                            {Object.values(fileSummary).map((item, index) => (
+                              <p
+                                key={index}
+                                className="text-left w-25 text-[#cbcbcb] text-base font-semibold"
+                              >
+                                {item}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
 

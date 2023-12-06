@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const DataTableWeight = ({weight}) => {
-  return (
-    <span>{weight !== "Unknown" ? `${weight} kg`: weight}</span>
-  )
-}
+const DataTableWeight = ({ value }) => {
+  return <span>{value !== "Unknown" ? `${value} kg` : value}</span>;
+};
 
-export default DataTableWeight
+export default DataTableWeight;
